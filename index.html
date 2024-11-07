@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
-  <title>Google Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Simples</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://accounts.google.com/gsi/client" async defer></script> 
 </head>
 <body>
   <div class="container">
     <div class="mode-toggle">
       <button id="mode-toggle-button">Dark Mode</button>
     </div>
-    <h1>Google Login</h1>
-    <div id="login-container" class="hidden">
-      <button id="google-login-button">Sign in with Google</button>
+    <h1>Login</h1>
+    <div id="login-container">
+      <form id="login-form">
+        <input type="text" id="username" placeholder="Usuário" required>
+        <input type="password" id="password" placeholder="Senha" required>
+        <label>
+          <input type="checkbox" id="show-password"> Mostrar Senha
+        </label>
+        <button type="submit" id="login-button">Entrar</button>
+      </form>
+      <button id="show-register">Registrar</button>
+    </div>
+    <div id="register-container" class="hidden">
+      <form id="register-form">
+        <input type="text" id="new-username" placeholder="Novo Usuário" required>
+        <input type="password" id="new-password" placeholder="Nova Senha" required>
+        <button type="submit" id="register-button">Registrar</button>
+      </form>
+      <button id="show-login">Já tenho conta</button>
     </div>
     <div id="user-info" class="hidden">
-      <h2>Welcome, <span id="user-name"></span>!</h2>
-      <p>Your email: <span id="user-email"></span></p>
-      <button id="logout-button">Logout</button>
+      <h2>Bem-vindo, <span id="user-name"></span>!</h2>
+      <button id="logout-button">Sair</button>
     </div>
   </div>
 
-  <script src="script.js"></script> 
+  <script src="script.js"></script>
 </body>
 </html>

@@ -4,49 +4,52 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f0f0; /* Initial light mode */
-  transition: background-color 0.3s ease; /* Smooth transition for background */
-  color: #333; /* Initial text color for light mode */
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
+  color: #333;
 }
 
 .container {
-  background-color: #fff; /* Light mode container color */
+  background-color: #fff;
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: background-color 0.3s ease; /* Smooth transition for container */
+  transition: background-color 0.3s ease;
 }
 
 h1 {
   margin-bottom: 20px;
 }
 
-#google-login-button {
+input {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
   background-color: #4285f4;
   color: #fff;
   padding: 10px 20px;
   border: none;
-  border-radius: 20px; /* Round the login button */
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition for login button */
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-#logout-button {
-  background-color: #f44336;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px; /* Round the logout button */
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition for logout button */
+button:hover {
+  background-color: #357ae8;
 }
 
 .hidden {
   display: none;
 }
 
-/* Mode Toggle Styling */
 .mode-toggle {
   position: fixed;
   top: 20px;
@@ -54,16 +57,15 @@ h1 {
 }
 
 #mode-toggle-button {
-  background-color: #4CAF50; /* Green for dark mode */
+  background-color: #4CAF50;
   color: white;
   padding: 8px 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition for toggle button */
+  transition: background-color 0.3s ease;
 }
 
-/* Dark Mode Styles */
 body.dark-mode {
   background-color: #222;
   color: #eee;
@@ -71,16 +73,4 @@ body.dark-mode {
 
 .container.dark-mode {
   background-color: #333;
-}
-
-#google-login-button.dark-mode {
-  background-color: #4285f4; /* Keep blue */
-}
-
-#logout-button.dark-mode {
-  background-color: #f44336; /* Keep red */
-}
-
-#mode-toggle-button.dark-mode {
-  background-color: #f44336; /* Red for light mode */
 }
