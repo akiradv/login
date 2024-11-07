@@ -1,53 +1,86 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  font-size: 14px;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0; /* Initial light mode */
+  transition: background-color 0.3s ease; /* Smooth transition for background */
+  color: #333; /* Initial text color for light mode */
 }
 
-.header {
-  width: 100%;
-  height: 746px;
-  background: rgba(0, 0, 0, 1);
-  position: relative;
-  overflow: hidden;
+.container {
+  background-color: #fff; /* Light mode container color */
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: background-color 0.3s ease; /* Smooth transition for container */
 }
 
-.header-title {
-  width: 179px;
-  color: rgba(255, 255, 255, 1);
-  position: absolute;
-  top: 42px;
-  left: 64px;
-  font-size: 50px;
-  text-align: left;
+h1 {
+  margin-bottom: 20px;
 }
 
-.nav-item {
-  color: rgba(255, 255, 255, 1);
-  position: absolute;
-  top: 42px;
-  font-size: 50px;
-  text-align: left;
+#google-login-button {
+  background-color: #4285f4;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px; /* Round the login button */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for login button */
 }
 
-.nav-item.inicio {
-  left: 899px;
+#logout-button {
+  background-color: #f44336;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px; /* Round the logout button */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for logout button */
 }
 
-.nav-item.sobre {
-  left: 1042px;
+.hidden {
+  display: none;
 }
 
-.main-title {
-  width: 513px;
-  color: rgba(255, 255, 255, 1);
-  position: absolute;
-  top: 258px;
-  left: 153px;
-  font-size: 80px;
-  text-align: left;
+/* Mode Toggle Styling */
+.mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+#mode-toggle-button {
+  background-color: #4CAF50; /* Green for dark mode */
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for toggle button */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #222;
+  color: #eee;
+}
+
+.container.dark-mode {
+  background-color: #333;
+}
+
+#google-login-button.dark-mode {
+  background-color: #4285f4; /* Keep blue */
+}
+
+#logout-button.dark-mode {
+  background-color: #f44336; /* Keep red */
+}
+
+#mode-toggle-button.dark-mode {
+  background-color: #f44336; /* Red for light mode */
 }
