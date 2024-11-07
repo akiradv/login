@@ -14,11 +14,13 @@
     <h1>Login</h1>
     <div id="login-container">
       <form id="login-form">
-        <input type="text" id="username" placeholder="Usuário" required>
-        <input type="password" id="password" placeholder="Senha" required>
-        <label>
-          <input type="checkbox" id="show-password"> Mostrar Senha
-        </label>
+        <div class="input-container">
+          <input type="text" id="username" placeholder="Usuário" required>
+        </div>
+        <div class="input-container">
+          <input type="password" id="password" placeholder="Senha" required>
+          <input type="checkbox" id="show-password" class="show-password-checkbox">
+        </div>
         <button type="submit" id="login-button">Entrar</button>
       </form>
       <button id="show-register">Registrar</button>
