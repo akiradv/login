@@ -5,32 +5,37 @@ document.addEventListener('DOMContentLoaded', function() {
     window.location.href = 'dashboard.html';
   }
 
-  document.getElementById('login-form').addEventListener('submit', async function(event) {
+  document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
 
-    const success = await login(username, password);
-    if (success) {
+    // Recuperar credenciais armazenadas
+    const storedUsername = localStorage.getItem('username');
+    const storedPassword = localStorage.getItem('password');
+
+    // Verificar credenciais
+    if (storedUsername && storedPassword && username === storedUsername && password === storedPassword) {
+      // Simular um token de autenticação
+      localStorage.setItem('token', 'dummy-token');
       window.location.href = 'dashboard.html';
     } else {
       alert('Usuário ou senha incorretos!');
     }
   });
 
-  document.getElementById('register-form').addEventListener('submit', async function(event) {
+  document.getElementById('register-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const newUsername = document.getElementById('new-username').value.trim();
     const newPassword = document.getElementById('new-password').value.trim();
 
-    const success = await register(newUsername, newPassword);
-    if (success) {
-      alert(`Usuário ${newUsername} registrado com sucesso!`);
-      document.getElementById('register-container').classList.add('hidden');
-      document.getElementById('login-container').classList.remove('hidden');
-    } else {
-      alert('Erro ao registrar. Tente novamente.');
-    }
+    // Armazenar credenciais
+    localStorage.setItem('username', newUsername);
+    localStorage.setItem('password', newPassword);
+
+    alert(`Usuário ${newUsername} registrado com sucesso!`);
+    document.getElementById('register-container').classList.add('hidden');
+    document.getElementById('login-container').classList.remove('hidden');
   });
 
   document.getElementById('show-register').addEventListener('click', function() {

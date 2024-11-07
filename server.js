@@ -1,4 +1,5 @@
 // server.js
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -8,8 +9,16 @@ const jwt = require('jsonwebtoken');
 const app = express();
 app.use(bodyParser.json());
 
-// Conectar ao MongoDB
-mongoose.connect('mongodb://localhost:27017/loginApp', { useNewUrlParser: true, useUnifiedTopology: true });
+// Conectar ao MongoDB Atlas usando a variável de ambiente
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+mongoose.connection.on('connected', () => {
+  console.log('Conectado ao MongoDB Atlas');
+});
+
+mongoose.connection.on('error', (err) => {
+  console.error('Erro ao conectar ao MongoDB Atlas:', err);
+});
 
 // Definir o modelo de usuário
 const UserSchema = new mongoose.Schema({

@@ -97,3 +97,26 @@ body.dark-mode {
 .container.dark-mode {
   background-color: #333;
 }
+
+.dashboard-content {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 45%;
+  text-align: left;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card p, .card ul {
+  margin: 5px 0;
+}

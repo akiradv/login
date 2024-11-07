@@ -15,7 +15,21 @@
     <main>
       <h2>Bem-vindo, <span id="user-name"></span>!</h2>
       <p>Aqui está o seu painel de controle.</p>
-      <!-- Adicione mais conteúdo aqui -->
+      <div class="dashboard-content">
+        <!-- Exemplo de conteúdo dinâmico -->
+        <div class="card">
+          <h3>Estatísticas</h3>
+          <p>Usuários ativos: 120</p>
+          <p>Novos registros: 30</p>
+        </div>
+        <div class="card">
+          <h3>Notificações</h3>
+          <ul>
+            <li>Você tem 5 novas mensagens</li>
+            <li>Atualização do sistema disponível</li>
+          </ul>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -26,8 +40,7 @@
 
     // Função de logout
     document.getElementById('logout-button').addEventListener('click', function() {
-      localStorage.removeItem('username');
-      localStorage.removeItem('password');
+      localStorage.removeItem('token'); // Remover o token de autenticação
       window.location.href = 'index.html'; // Redireciona para a página de login
     });
   </script>
