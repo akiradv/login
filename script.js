@@ -37,13 +37,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const newUsername = document.getElementById('new-username').value.trim();
     const newPassword = document.getElementById('new-password').value.trim();
 
-    // Armazenar credenciais
-    localStorage.setItem('username', newUsername);
-    localStorage.setItem('password', newPassword);
-
-    alert(`Usuário ${newUsername} registrado com sucesso!`);
-    document.getElementById('register-container').classList.add('hidden');
-    document.getElementById('login-container').classList.remove('hidden');
+    // Enviar requisição de registro para o servidor
+    fetch('/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username: newUsername, password: newPassword })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === 'Usuário registrado com sucesso!') {
+        alert(data.message);
+        document.getElementById('register-container').classList.add('hidden');
+        document.getElementById('login-container').classList.remove('hidden');
+      } else {
+        alert(data.message); // Exibir mensagem de erro se o nome de usuário já estiver em uso
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao registrar usuário:', error);
+      alert('Erro ao registrar usuário.');
+    });
   });
 
   document.getElementById('show-register').addEventListener('click', function() {

@@ -43,17 +43,22 @@ app.get('/stats', (req, res) => {
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
 
-  // Verificar se o nome de usuário já existe
-  const existingUser = await User.findOne({ username });
-  if (existingUser) {
-    return res.status(400).send('Nome de usuário já está em uso!');
-  }
+  try {
+    // Verificar se o nome de usuário já existe
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Nome de usuário já está em uso!' });
+    }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = new User({ username, password: hashedPassword });
-  await user.save();
-  newRegistrations++; // Incrementar novos registros
-  res.status(201).send('Usuário registrado com sucesso!');
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ username, password: hashedPassword });
+    await user.save();
+    newRegistrations++; // Incrementar novos registros
+    res.status(201).json({ message: 'Usuário registrado com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao registrar usuário:', error);
+    res.status(500).json({ message: 'Erro interno do servidor' });
+  }
 });
 
 // Rota de login
