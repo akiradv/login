@@ -1,15 +1,17 @@
 # Projeto de Login para Dashboard
 
-Este é um projeto simples de autenticação de usuário para uma dashboard. Este repositório destina-se apenas a exibir o código-fonte do projeto e não deve ser usado diretamente. Caso deseje acessar a funcionalidade, utilize o link abaixo para realizar o login através do nosso site oficial.
+Este é um projeto simples de autenticação para uma dashboard, incluindo funcionalidades básicas de criação e gerenciamento de contas. Este repositório é apenas para referência do código e **não deve ser usado diretamente**. Para utilizar a funcionalidade de login, acesse o site oficial através do link abaixo.
 
-**[Acesse a Dashboard aqui]((https://akiradv.github.io/login/))**
+**[Acesse a Dashboard aqui](https://akiradv.github.io/login/)**
 
-## Funcionalidades
+## Funcionalidades do Projeto
 
-- Autenticação segura com email e senha
-- Validação de entrada de dados
-- Feedback de erros de autenticação
-- Redirecionamento para a dashboard após login bem-sucedido
+- **Salvamento de Contas**: Armazena dados dos usuários para acesso posterior.
+- **Bloqueio de Criação de Contas Duplicadas**: Impede a criação de uma nova conta com um nome de usuário já existente.
+- **Modo Escuro**: Salva o estado de Dark Mode do usuário para personalização do tema.
+- **Verificação de Todos os Usuários**: Acesso a uma lista completa de usuários cadastrados (sujeito a permissões de administrador).
+
+> Para mais informações e detalhes sobre o funcionamento do código, recomendamos a consulta direta ao repositório.
 
 ## Tecnologias Utilizadas
 
@@ -20,12 +22,12 @@ Este é um projeto simples de autenticação de usuário para uma dashboard. Est
 
 ## Acesso
 
-Para utilizar a dashboard, acesse o link abaixo e faça login com suas credenciais:
+Para utilizar a dashboard e o sistema de login, acesse o link abaixo:
 
 **[https://akiradev.com](https://akiradv.github.io/login/)**
 
-> Este repositório é somente para referência. A dashboard e o login funcionam exclusivamente em nosso site.
+> Este repositório é destinado somente para consulta. O uso da funcionalidade de login deve ser feito diretamente em nosso site.
 
 ## Contribuição
 
-Não aceitamos contribuições diretas neste repositório, pois ele serve apenas para fins de exibição e documentação do projeto.
+Contribuições diretas não são aceitas neste repositório, uma vez que ele serve apenas para documentação e exibição do código.
