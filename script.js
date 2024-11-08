@@ -74,4 +74,41 @@ document.addEventListener('DOMContentLoaded', function() {
     modeToggleButton.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
     localStorage.setItem('darkMode', isDarkMode);
   });
+
+  // Exibir o nome do usuário
+  const username = localStorage.getItem('username');
+  document.getElementById('user-name').innerText = username;
+
+  // Função de logout
+  document.getElementById('logout-button').addEventListener('click', function() {
+    localStorage.removeItem('token'); // Remover o token de autenticação
+    window.location.href = 'index.html'; // Redireciona para a página de login
+  });
+
+  // Função para enviar notificação ao Discord
+  document.getElementById('notify-button').addEventListener('click', function() {
+    const webhookUrl = 'https://discord.com/api/webhooks/1304256902397693993/ZIjmF-yGTQEviaZGBf01bfVH42smJG-8_lYy_Nj9NzRVHK6f1Dz7cUsKW_RDHUZDKSNu';
+    const message = {
+      content: `Notificação do usuário: ${username}`
+    };
+
+    fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(message)
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Notificação enviada com sucesso!');
+      } else {
+        alert('Falha ao enviar notificação.');
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao enviar notificação:', error);
+      alert('Erro ao enviar notificação.');
+    });
+  });
 });
