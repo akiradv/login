@@ -28,6 +28,17 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
+let activeUsers = 0; // Contador de usuários ativos
+let newRegistrations = 0; // Contador de novos registros
+
+// Rota para obter estatísticas
+app.get('/stats', (req, res) => {
+  res.json({
+    activeUsers,
+    newRegistrations
+  });
+});
+
 // Rota de registro
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
@@ -41,6 +52,7 @@ app.post('/register', async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = new User({ username, password: hashedPassword });
   await user.save();
+  newRegistrations++; // Incrementar novos registros
   res.status(201).send('Usuário registrado com sucesso!');
 });
 
@@ -50,10 +62,17 @@ app.post('/login', async (req, res) => {
   const user = await User.findOne({ username });
   if (user && await bcrypt.compare(password, user.password)) {
     const token = jwt.sign({ username }, 'secreta', { expiresIn: '1h' });
+    activeUsers++; // Incrementar usuários ativos
     res.json({ token });
   } else {
     res.status(401).send('Usuário ou senha incorretos!');
   }
+});
+
+// Rota de logout
+app.post('/logout', (req, res) => {
+  activeUsers = Math.max(0, activeUsers - 1); // Decrementar usuários ativos, garantindo que não fique negativo
+  res.status(200).send('Logout realizado com sucesso!');
 });
 
 // Iniciar o servidor

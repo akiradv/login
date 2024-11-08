@@ -81,8 +81,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Função de logout
   document.getElementById('logout-button').addEventListener('click', function() {
-    localStorage.removeItem('token'); // Remover o token de autenticação
-    window.location.href = 'index.html'; // Redireciona para a página de login
+    fetch('/logout', {
+      method: 'POST'
+    })
+    .then(response => {
+      if (response.ok) {
+        localStorage.removeItem('token'); // Remover o token de autenticação
+        window.location.href = 'index.html'; // Redireciona para a página de login
+      } else {
+        alert('Erro ao fazer logout.');
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao fazer logout:', error);
+      alert('Erro ao fazer logout.');
+    });
   });
 
   // Função para enviar notificação ao Discord
@@ -111,4 +124,18 @@ document.addEventListener('DOMContentLoaded', function() {
       alert('Erro ao enviar notificação.');
     });
   });
+
+  // Função para atualizar estatísticas
+  function updateStats() {
+    fetch('/stats')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('active-users').innerText = data.activeUsers;
+        document.getElementById('new-registrations').innerText = data.newRegistrations;
+      })
+      .catch(error => console.error('Erro ao buscar estatísticas:', error));
+  }
+
+  // Atualizar estatísticas ao carregar a página
+  updateStats();
 });
