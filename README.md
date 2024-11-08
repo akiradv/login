@@ -2,7 +2,7 @@
 
 Este é um projeto simples de autenticação de usuário para uma dashboard. Este repositório destina-se apenas a exibir o código-fonte do projeto e não deve ser usado diretamente. Caso deseje acessar a funcionalidade, utilize o link abaixo para realizar o login através do nosso site oficial.
 
-**[Acesse a Dashboard aqui](https://akiradv.github.io/portifolio/)**
+**[Acesse a Dashboard aqui]((https://akiradv.github.io/login/))**
 
 ## Funcionalidades
 
@@ -22,7 +22,7 @@ Este é um projeto simples de autenticação de usuário para uma dashboard. Est
 
 Para utilizar a dashboard, acesse o link abaixo e faça login com suas credenciais:
 
-**[https://akiradev.com](https://akiradv.github.io/portifolio/)**
+**[https://akiradev.com](https://akiradv.github.io/login/)**
 
 > Este repositório é somente para referência. A dashboard e o login funcionam exclusivamente em nosso site.
 
