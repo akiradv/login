@@ -31,6 +31,13 @@ const User = mongoose.model('User', UserSchema);
 // Rota de registro
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
+
+  // Verificar se o nome de usuário já existe
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    return res.status(400).send('Nome de usuário já está em uso!');
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = new User({ username, password: hashedPassword });
   await user.save();

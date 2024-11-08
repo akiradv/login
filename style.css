@@ -5,7 +5,7 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #f0f0f0;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, filter 0.3s ease;
   color: #333;
 }
 
@@ -35,6 +35,9 @@ input {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .show-password-checkbox {
@@ -98,6 +101,15 @@ body.dark-mode {
   background-color: #333;
 }
 
+body.dark-mode input {
+  background-color: #555;
+  color: #eee;
+}
+
+body.brightness-low {
+  filter: brightness(0.7);
+}
+
 .dashboard-content {
   display: flex;
   justify-content: space-around;
@@ -111,6 +123,7 @@ body.dark-mode {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 45%;
   text-align: left;
+  transition: background-color 0.3s ease;
 }
 
 .card h3 {
@@ -119,4 +132,10 @@ body.dark-mode {
 
 .card p, .card ul {
   margin: 5px 0;
+}
+
+/* Estilos para o modo escuro */
+body.dark-mode .card {
+  background-color: #444;
+  color: #eee;
 }

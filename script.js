@@ -63,4 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
     modeToggleButton.classList.toggle('dark-mode');
     modeToggleButton.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
   });
+
+  // Adicionar controle de brilho na dashboard
+  const brightnessToggleButton = document.createElement('button');
+  brightnessToggleButton.textContent = 'Ajustar Brilho';
+  brightnessToggleButton.style.marginLeft = '10px';
+  document.querySelector('header').appendChild(brightnessToggleButton);
+
+  let isBrightnessLow = false;
+  brightnessToggleButton.addEventListener('click', () => {
+    isBrightnessLow = !isBrightnessLow;
+    document.body.classList.toggle('brightness-low');
+    brightnessToggleButton.textContent = isBrightnessLow ? 'Brilho Normal' : 'Ajustar Brilho';
+  });
 });
