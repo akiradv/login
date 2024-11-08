@@ -27,8 +27,13 @@
     </div>
     <div id="register-container" class="hidden">
       <form id="register-form">
-        <input type="text" id="new-username" placeholder="Novo Usuário" required>
-        <input type="password" id="new-password" placeholder="Nova Senha" required>
+        <div class="input-container">
+          <input type="text" id="new-username" placeholder="Novo Usuário" required>
+        </div>
+        <div class="input-container">
+          <input type="password" id="new-password" placeholder="Nova Senha" required>
+          <input type="checkbox" id="show-new-password" class="show-password-checkbox">
+        </div>
         <button type="submit" id="register-button">Registrar</button>
       </form>
       <button id="show-login">Já tenho conta</button>

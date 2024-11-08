@@ -5,6 +5,14 @@ document.addEventListener('DOMContentLoaded', function() {
     window.location.href = 'dashboard.html';
   }
 
+  // Aplicar preferência de modo escuro
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  if (isDarkMode) {
+    document.body.classList.add('dark-mode');
+    document.querySelector('.container').classList.add('dark-mode');
+    document.getElementById('mode-toggle-button').textContent = 'Light Mode';
+  }
+
   document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('username').value.trim();
@@ -53,27 +61,17 @@ document.addEventListener('DOMContentLoaded', function() {
     passwordField.type = this.checked ? 'text' : 'password';
   });
 
-  const modeToggleButton = document.getElementById('mode-toggle-button');
-  let isDarkMode = false;
-
-  modeToggleButton.addEventListener('click', () => {
-    isDarkMode = !isDarkMode;
-    document.body.classList.toggle('dark-mode');
-    document.querySelector('.container').classList.toggle('dark-mode');
-    modeToggleButton.classList.toggle('dark-mode');
-    modeToggleButton.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+  document.getElementById('show-new-password').addEventListener('change', function() {
+    const newPasswordField = document.getElementById('new-password');
+    newPasswordField.type = this.checked ? 'text' : 'password';
   });
 
-  // Adicionar controle de brilho na dashboard
-  const brightnessToggleButton = document.createElement('button');
-  brightnessToggleButton.textContent = 'Ajustar Brilho';
-  brightnessToggleButton.style.marginLeft = '10px';
-  document.querySelector('header').appendChild(brightnessToggleButton);
+  const modeToggleButton = document.getElementById('mode-toggle-button');
 
-  let isBrightnessLow = false;
-  brightnessToggleButton.addEventListener('click', () => {
-    isBrightnessLow = !isBrightnessLow;
-    document.body.classList.toggle('brightness-low');
-    brightnessToggleButton.textContent = isBrightnessLow ? 'Brilho Normal' : 'Ajustar Brilho';
+  modeToggleButton.addEventListener('click', () => {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    document.querySelector('.container').classList.toggle('dark-mode');
+    modeToggleButton.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+    localStorage.setItem('darkMode', isDarkMode);
   });
 });
