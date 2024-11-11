@@ -1,33 +1,17 @@
 // server.js
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cors = require('cors'); // Importar o middleware CORS
 
 const app = express();
+app.use(cors()); // Usar o middleware CORS
 app.use(bodyParser.json());
 
-// Conectar ao MongoDB Atlas usando a variável de ambiente
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-mongoose.connection.on('connected', () => {
-  console.log('Conectado ao MongoDB Atlas');
-});
-
-mongoose.connection.on('error', (err) => {
-  console.error('Erro ao conectar ao MongoDB Atlas:', err);
-});
-
-// Definir o modelo de usuário
-const UserSchema = new mongoose.Schema({
-  username: String,
-  password: String
-});
-
-const User = mongoose.model('User', UserSchema);
-
+// Armazenar usuários em memória
+let users = [];
 let activeUsers = 0; // Contador de usuários ativos
 let newRegistrations = 0; // Contador de novos registros
 
@@ -42,18 +26,20 @@ app.get('/stats', (req, res) => {
 // Rota de registro
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
+  console.log('Tentativa de registro:', username);
 
   try {
     // Verificar se o nome de usuário já existe
-    const existingUser = await User.findOne({ username });
+    const existingUser = users.find(user => user.username === username);
     if (existingUser) {
+      console.log('Nome de usuário já está em uso:', username);
       return res.status(400).json({ message: 'Nome de usuário já está em uso!' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword });
-    await user.save();
-    newRegistrations++; // Incrementar novos registros
+    users.push({ username, password: hashedPassword });
+    newRegistrations++;
+    console.log('Usuário registrado com sucesso:', username);
     res.status(201).json({ message: 'Usuário registrado com sucesso!' });
   } catch (error) {
     console.error('Erro ao registrar usuário:', error);
@@ -64,23 +50,28 @@ app.post('/register', async (req, res) => {
 // Rota de login
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.findOne({ username });
-  if (user && await bcrypt.compare(password, user.password)) {
-    const token = jwt.sign({ username }, 'secreta', { expiresIn: '1h' });
-    activeUsers++; // Incrementar usuários ativos
-    res.json({ token });
-  } else {
-    res.status(401).send('Usuário ou senha incorretos!');
+  try {
+    const user = users.find(user => user.username === username);
+    if (user && await bcrypt.compare(password, user.password)) {
+      const token = jwt.sign({ username }, 'secreta', { expiresIn: '1h' });
+      activeUsers++;
+      res.json({ token });
+    } else {
+      res.status(401).json({ message: 'Usuário ou senha incorretos!' });
+    }
+  } catch (error) {
+    console.error('Erro ao fazer login:', error);
+    res.status(500).json({ message: 'Erro interno do servidor' });
   }
 });
 
 // Rota de logout
 app.post('/logout', (req, res) => {
-  activeUsers = Math.max(0, activeUsers - 1); // Decrementar usuários ativos, garantindo que não fique negativo
+  activeUsers = Math.max(0, activeUsers - 1);
   res.status(200).send('Logout realizado com sucesso!');
 });
 
 // Iniciar o servidor
-app.listen(3000, () => {
-  console.log('Servidor rodando na porta 3000');
+app.listen(8080, () => {
+  console.log('Servidor rodando na porta 8080');
 });
