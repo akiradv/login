@@ -25,6 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (user) {
       localStorage.setItem('token', 'fake-jwt-token'); // Armazenar um token falso
       localStorage.setItem('username', username); // Armazenar o nome de usuário
+
+      // Incrementar o número de usuários ativos
+      let activeUsers = parseInt(localStorage.getItem('activeUsers')) || 0;
+      activeUsers++;
+      localStorage.setItem('activeUsers', activeUsers);
+
       alert('Login realizado com sucesso!');
       window.location.href = 'dashboard.html'; // Redirecionar para a dashboard
     } else {
@@ -91,6 +97,12 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('logout-button').addEventListener('click', function() {
     localStorage.removeItem('token'); // Remover o token de autenticação
     localStorage.removeItem('username'); // Remover o nome de usuário
+
+    // Decrementar o número de usuários ativos
+    let activeUsers = parseInt(localStorage.getItem('activeUsers')) || 0;
+    activeUsers = Math.max(0, activeUsers - 1);
+    localStorage.setItem('activeUsers', activeUsers);
+
     window.location.href = 'index.html'; // Redireciona para a página de login
   });
 });

@@ -43,10 +43,8 @@
     document.getElementById('user-name').innerText = username;
 
     // Atualizar número de usuários ativos
-    function updateActiveUsers() {
-      let activeUsers = parseInt(localStorage.getItem('activeUsers')) || 0;
-      activeUsers++;
-      localStorage.setItem('activeUsers', activeUsers);
+    function displayActiveUsers() {
+      const activeUsers = parseInt(localStorage.getItem('activeUsers')) || 0;
       document.getElementById('active-users').innerText = activeUsers;
     }
 
@@ -57,7 +55,7 @@
     }
 
     // Chamar funções de atualização ao carregar a página
-    updateActiveUsers();
+    displayActiveUsers();
     updateNewRegistrations();
 
     // Aplicar preferência de modo escuro
@@ -92,8 +90,12 @@
     document.getElementById('notify-button').addEventListener('click', function() {
       if (username) {
         const webhookUrl = 'https://discord.com/api/webhooks/1304256902397693993/ZIjmF-yGTQEviaZGBf01bfVH42smJG-8_lYy_Nj9NzRVHK6f1Dz7cUsKW_RDHUZDKSNu';
+        const activeUsers = localStorage.getItem('activeUsers') || 0;
+        const newRegistrations = JSON.parse(localStorage.getItem('users')).length || 0;
+        const today = new Date().toLocaleDateString('pt-BR');
+
         const message = {
-          content: `Notificação do usuário: ${username}`
+          content: `Notificação do usuário: ${username}\nUsuários ativos: ${activeUsers}\nNovos registros: ${newRegistrations}\nLog do dia: ${today}`
         };
 
         fetch(webhookUrl, {
